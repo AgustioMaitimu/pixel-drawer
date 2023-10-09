@@ -2,13 +2,30 @@ const canvas = document.querySelector('.canvas')
 const gridMenu = document.getElementById('grid-menu')
 const hideGridBtn = document.querySelector('.grid-button')
 const clearCanvasBtn = document.querySelector('.clear-canvas')
-let randomColorMode;
+const randomColorBtn = document.getElementById('random-color')
+const singleColorBtn = document.getElementById('single-color')
+const eraseColorBtn = document.getElementById('erase-color')
+const modeButtons = [randomColorBtn, singleColorBtn, eraseColorBtn]
+let buttonsContainer = document.querySelector('.mode-buttons')
+let pickedMode;
 let colorPicker;
 let grid;
 let grids;
 let gridSize = 64;
 let gridProportion = 74
 let flag;
+
+buttonsContainer.addEventListener('click', (e) => {
+    if (modeButtons.includes(e.target)) {
+        e.target.style.backgroundColor = 'gray'
+        pickedMode = e.target.innerHTML
+        for (button of modeButtons) {
+            if (button != e.target) {
+                button.style.backgroundColor = 'white'
+            }
+        }
+    }
+})
 
 clearCanvasBtn.addEventListener('click', clearCanvas)
 hideGridBtn.addEventListener('click', hideGrid)
@@ -18,8 +35,6 @@ createGrid()
 gridMenu.addEventListener('change', () => {
     gridSize = gridMenu.value;
     gridProportion = 592 / Math.sqrt(gridSize)
-    console.log(gridSize)
-    console.log(gridProportion)
     createGrid()
 })
 
@@ -60,47 +75,37 @@ function hideGrid() {
 
 function clearCanvas() {
     for (i of grids) {
-        i.style.backgroundColor = 'white'
+        i.style.backgroundColor = ''
     }
 }
 
 function draw() {
     grid.addEventListener('mousedown', function(event) {
         flag = true;
-        randomColorMode = document.getElementById('random-color').checked
-        if (randomColorMode) {
+        if (pickedMode == 'Random Color') {
             event.target.style.backgroundColor = `rgb(${Math.floor(Math.random() * (230 - 50 + 1)) + 100}, ${Math.floor(Math.random() * (230 - 100 + 1)) + 100}, ${Math.floor(Math.random() * (230 - 100 + 1)) + 100})`
-            console.log(event.target.style.backgroundColor)
-        } else {
+        } else if (pickedMode == 'Single Color') {
             colorPicker = document.getElementById('color-picker').value
+            event.target.style.backgroundColor = colorPicker
+        } else if (pickedMode == 'Erase Color') {
+            colorPicker = ''
             event.target.style.backgroundColor = colorPicker
         }
     });
 
     grid.addEventListener('mouseenter', function(event) {
     if (flag) {
-        randomColorMode = document.getElementById('random-color').checked
-        if (randomColorMode) {
+        if (pickedMode == 'Random Color') {
             event.target.style.backgroundColor = `rgb(${Math.floor(Math.random() * (230 - 50 + 1)) + 100}, ${Math.floor(Math.random() * (230 - 100 + 1)) + 100}, ${Math.floor(Math.random() * (230 - 100 + 1)) + 100})`
-            console.log(event.target.style.backgroundColor)
-        } else {
+        } else if (pickedMode == 'Single Color') {
             colorPicker = document.getElementById('color-picker').value
+            event.target.style.backgroundColor = colorPicker
+        } else if (pickedMode == 'Erase Color') {
+            colorPicker = ''
             event.target.style.backgroundColor = colorPicker
         }
         
     }
-    });
-
-    grid.addEventListener('click', function(event) {
-        randomColorMode = document.getElementById('random-color').checked
-        if (randomColorMode) {
-            event.target.style.backgroundColor = `rgb(${Math.floor(Math.random() * (230 - 100 + 1)) + 100}, ${Math.floor(Math.random() * (230 - 100 + 1)) + 100}, ${Math.floor(Math.random() * (230 - 100 + 1)) + 100})`
-            console.log(event.target.style.backgroundColor)
-        } else {
-            colorPicker = document.getElementById('color-picker').value
-            event.target.style.backgroundColor = colorPicker
-        }
-        
     });
 
     grid.addEventListener('mouseup', function(event) {

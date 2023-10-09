@@ -20,10 +20,23 @@ body {
     gap: 5px;
 }
 
-.random-color-checkbox {
+.mode-buttons {
+    flex-direction: column;
     display: flex;
-    align-items: center;
-    gap: 2px;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.mode-button {
+    background-color: white;
+}
+
+.clear-canvas {
+    background-color: white;
+}
+
+.grid-button {
+    background-color: white;
 }
 
 .canvas {
@@ -45,10 +58,9 @@ body {
     height: 40px;
     width: 40px;
     border: 1px solid rgb(179, 179, 179);
-    /* border: 1px solid red; */
     box-sizing: border-box;
 }
 
 .grid:hover {
-    background-color: gray;
+    background-color: rgb(199, 199, 199);
 }

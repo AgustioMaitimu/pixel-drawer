@@ -19,16 +19,19 @@
                 <!-- <option value="4096">64x64</option> -->
             </select>
         </div>
+        <div class="mode-buttons">
+            Color Modes:
+            <button id="random-color" class="mode-button">Random Color</button>
+            <button id="single-color" class="mode-button">Single Color</button>
+            <button id="erase-color" class="mode-button">Erase Color</button>
+        </div>
         <div class="color-palette">
-            <label for="color-picker">Pick A Color</label>
+            <label for="color-picker">Single Color:</label>
             <input type="color" id="color-picker">
         </div>
         <button class="clear-canvas">Clear Canvas</button>
         <button class="grid-button">Show Grid</button>
-        <div class="random-color-checkbox">
-            <label for="random-color">Random Color Mode</label>
-            <input type="checkbox" id="random-color">
-        </div>
+        
     </div>
     
     <div class="canvas">
