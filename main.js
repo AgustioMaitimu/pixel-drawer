@@ -7,7 +7,7 @@ let colorPicker;
 let grid;
 let grids;
 let gridSize = 64;
-let gridProportion = 90
+let gridProportion = 74
 let flag;
 
 clearCanvasBtn.addEventListener('click', clearCanvas)
@@ -17,7 +17,7 @@ createGrid()
 
 gridMenu.addEventListener('change', () => {
     gridSize = gridMenu.value;
-    gridProportion = 720 / Math.sqrt(gridSize)
+    gridProportion = 592 / Math.sqrt(gridSize)
     console.log(gridSize)
     console.log(gridProportion)
     createGrid()
@@ -34,39 +34,9 @@ function createGrid() {
         grid.style.height = `${gridProportion}px`
         grid.style.width = `${gridProportion}px`
         canvas.appendChild(grid)
-        grid.addEventListener('mousedown', function(event) {
-            flag = true;
-        });
-    
-        grid.addEventListener('mouseenter', function(event) {
-        if (flag) {
-            randomColorMode = document.getElementById('random-color').checked
-            if (randomColorMode) {
-                event.target.style.backgroundColor = `rgb(${Math.floor(Math.random() * (230 - 50 + 1)) + 100}, ${Math.floor(Math.random() * (230 - 100 + 1)) + 100}, ${Math.floor(Math.random() * (230 - 100 + 1)) + 100})`
-                console.log(event.target.style.backgroundColor)
-            } else {
-                colorPicker = document.getElementById('color-picker').value
-                event.target.style.backgroundColor = colorPicker
-            }
-            
-        }
-        });
 
-        grid.addEventListener('click', function(event) {
-            randomColorMode = document.getElementById('random-color').checked
-            if (randomColorMode) {
-                event.target.style.backgroundColor = `rgb(${Math.floor(Math.random() * (230 - 100 + 1)) + 100}, ${Math.floor(Math.random() * (230 - 100 + 1)) + 100}, ${Math.floor(Math.random() * (230 - 100 + 1)) + 100})`
-                console.log(event.target.style.backgroundColor)
-            } else {
-                colorPicker = document.getElementById('color-picker').value
-                event.target.style.backgroundColor = colorPicker
-            }
-            
-        });
-    
-        grid.addEventListener('mouseup', function(event) {
-            flag = false;
-        });
+        draw()
+        
     }
     grids = document.querySelectorAll('.grid')
     
@@ -90,8 +60,52 @@ function hideGrid() {
 
 function clearCanvas() {
     for (i of grids) {
-        i.style.backgroundColor = 'white' 
+        i.style.backgroundColor = 'white'
     }
+}
+
+function draw() {
+    grid.addEventListener('mousedown', function(event) {
+        flag = true;
+        randomColorMode = document.getElementById('random-color').checked
+        if (randomColorMode) {
+            event.target.style.backgroundColor = `rgb(${Math.floor(Math.random() * (230 - 50 + 1)) + 100}, ${Math.floor(Math.random() * (230 - 100 + 1)) + 100}, ${Math.floor(Math.random() * (230 - 100 + 1)) + 100})`
+            console.log(event.target.style.backgroundColor)
+        } else {
+            colorPicker = document.getElementById('color-picker').value
+            event.target.style.backgroundColor = colorPicker
+        }
+    });
+
+    grid.addEventListener('mouseenter', function(event) {
+    if (flag) {
+        randomColorMode = document.getElementById('random-color').checked
+        if (randomColorMode) {
+            event.target.style.backgroundColor = `rgb(${Math.floor(Math.random() * (230 - 50 + 1)) + 100}, ${Math.floor(Math.random() * (230 - 100 + 1)) + 100}, ${Math.floor(Math.random() * (230 - 100 + 1)) + 100})`
+            console.log(event.target.style.backgroundColor)
+        } else {
+            colorPicker = document.getElementById('color-picker').value
+            event.target.style.backgroundColor = colorPicker
+        }
+        
+    }
+    });
+
+    grid.addEventListener('click', function(event) {
+        randomColorMode = document.getElementById('random-color').checked
+        if (randomColorMode) {
+            event.target.style.backgroundColor = `rgb(${Math.floor(Math.random() * (230 - 100 + 1)) + 100}, ${Math.floor(Math.random() * (230 - 100 + 1)) + 100}, ${Math.floor(Math.random() * (230 - 100 + 1)) + 100})`
+            console.log(event.target.style.backgroundColor)
+        } else {
+            colorPicker = document.getElementById('color-picker').value
+            event.target.style.backgroundColor = colorPicker
+        }
+        
+    });
+
+    grid.addEventListener('mouseup', function(event) {
+        flag = false;
+    });
 }
     
 
