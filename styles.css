@@ -6,12 +6,33 @@ body {
     height: 100vh;
 }
 
+.options {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    margin-right: 20px;
+}
+
+.color-palette {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.random-color-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
 .canvas {
     display: flex;
     flex-wrap: wrap;
     border: 4px solid black;
-    height: 640px;
-    width: 640px;
+    height: 720px;
+    width: 720px;
+    box-shadow: 10px 10px 3px;
 }
 
 .grid-no-border {

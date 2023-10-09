@@ -7,20 +7,35 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <label for="grid-menu">Choose Canvas Size:</label>
-    <select name="grid-menu" id="grid-menu">
-        <option value="64">8x8</option> 
-        <option value="256">16x16</option> 
-        <option value="576">24x24</option> 
-        <option value="1024">32x32</option> 
-        <!-- <option value="2304">48x48</option> 
-        <option value="4096">64x64</option> -->
-    </select>
-
+    <div class="options">
+        <div class="grid-sizer">
+            <label for="grid-menu">Choose Canvas Size:</label>
+            <select name="grid-menu" id="grid-menu">
+                <option value="64">8x8</option> 
+                <option value="256">16x16</option> 
+                <option value="576">24x24</option> 
+                <option value="1024">32x32</option> 
+                <option value="2304">48x48</option> 
+                <!-- <option value="4096">64x64</option> -->
+            </select>
+        </div>
+        <div class="color-palette">
+            <label for="color-picker">Pick A Color</label>
+            <input type="color" id="color-picker">
+        </div>
+        <button class="clear-canvas">Clear Canvas</button>
+        <button class="grid-button">Show Grid</button>
+        <div class="random-color-checkbox">
+            <label for="random-color">Random Color Mode</label>
+            <input type="checkbox" id="random-color">
+        </div>
+    </div>
+    
     <div class="canvas">
         
     </div>
-    <button class="grid-button">Hide Grid</button>
+    
+    
     <script src="main.js"></script>
 </body>
 </html>

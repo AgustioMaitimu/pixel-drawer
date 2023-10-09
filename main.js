@@ -1,19 +1,23 @@
 const canvas = document.querySelector('.canvas')
 const gridMenu = document.getElementById('grid-menu')
 const hideGridBtn = document.querySelector('.grid-button')
+const clearCanvasBtn = document.querySelector('.clear-canvas')
+let randomColorMode;
+let colorPicker;
 let grid;
 let grids;
 let gridSize = 64;
-let gridProportion = 80
+let gridProportion = 90
 let flag;
 
+clearCanvasBtn.addEventListener('click', clearCanvas)
 hideGridBtn.addEventListener('click', hideGrid)
 
 createGrid()
 
 gridMenu.addEventListener('change', () => {
     gridSize = gridMenu.value;
-    gridProportion = 640 / Math.sqrt(gridSize)
+    gridProportion = 720 / Math.sqrt(gridSize)
     console.log(gridSize)
     console.log(gridProportion)
     createGrid()
@@ -26,7 +30,7 @@ function createGrid() {
     for (let i = 0; i < gridSize; i++) {
         grid = document.createElement('div')
         grid.classList.add(`grid`)
-        grid.classList.add(`grid-border`)
+        grid.classList.add(`grid-no-border`)
         grid.style.height = `${gridProportion}px`
         grid.style.width = `${gridProportion}px`
         canvas.appendChild(grid)
@@ -34,14 +38,30 @@ function createGrid() {
             flag = true;
         });
     
-        grid.addEventListener('mousemove', function(event) {
+        grid.addEventListener('mouseenter', function(event) {
         if (flag) {
-            event.target.style.backgroundColor = 'red'
+            randomColorMode = document.getElementById('random-color').checked
+            if (randomColorMode) {
+                event.target.style.backgroundColor = `rgb(${Math.floor(Math.random() * (230 - 50 + 1)) + 100}, ${Math.floor(Math.random() * (230 - 100 + 1)) + 100}, ${Math.floor(Math.random() * (230 - 100 + 1)) + 100})`
+                console.log(event.target.style.backgroundColor)
+            } else {
+                colorPicker = document.getElementById('color-picker').value
+                event.target.style.backgroundColor = colorPicker
+            }
+            
         }
         });
 
         grid.addEventListener('click', function(event) {
-            event.target.style.backgroundColor = 'red'
+            randomColorMode = document.getElementById('random-color').checked
+            if (randomColorMode) {
+                event.target.style.backgroundColor = `rgb(${Math.floor(Math.random() * (230 - 100 + 1)) + 100}, ${Math.floor(Math.random() * (230 - 100 + 1)) + 100}, ${Math.floor(Math.random() * (230 - 100 + 1)) + 100})`
+                console.log(event.target.style.backgroundColor)
+            } else {
+                colorPicker = document.getElementById('color-picker').value
+                event.target.style.backgroundColor = colorPicker
+            }
+            
         });
     
         grid.addEventListener('mouseup', function(event) {
@@ -66,8 +86,13 @@ function hideGrid() {
             hideGridBtn.innerHTML = 'Hide Grid'
         }
     }
-
-    
-    
 }
+
+function clearCanvas() {
+    for (i of grids) {
+        i.style.backgroundColor = 'white' 
+    }
+}
+    
+
 
