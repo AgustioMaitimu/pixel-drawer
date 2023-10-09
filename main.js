@@ -27,8 +27,22 @@ buttonsContainer.addEventListener('click', (e) => {
     }
 })
 
-clearCanvasBtn.addEventListener('click', clearCanvas)
-hideGridBtn.addEventListener('click', hideGrid)
+clearCanvasBtn.addEventListener('click', (event) => {
+    const target = event.target
+    target.style.backgroundColor = 'gray'
+    setTimeout(function(){
+        target.style.backgroundColor = 'white'
+    }, 150);
+    clearCanvas()
+})
+hideGridBtn.addEventListener('click', (event) => {
+    const target = event.target
+    target.style.backgroundColor = 'gray'
+    setTimeout(function(){
+        target.style.backgroundColor = 'white'
+    }, 150);
+    hideGrid()
+})
 
 createGrid()
 

@@ -61,6 +61,10 @@ body {
     box-sizing: border-box;
 }
 
+.grid {
+    transition-duration: 0.1s;
+}
+
 .grid:hover {
     background-color: rgb(199, 199, 199);
 }
