@@ -5,7 +5,8 @@ const clearCanvasBtn = document.querySelector('.clear-canvas')
 const randomColorBtn = document.getElementById('random-color')
 const singleColorBtn = document.getElementById('single-color')
 const eraseColorBtn = document.getElementById('erase-color')
-const modeButtons = [randomColorBtn, singleColorBtn, eraseColorBtn]
+const eyeDropperTool = document.getElementById('eyedrop-color')
+const modeButtons = [randomColorBtn, singleColorBtn, eraseColorBtn, eyeDropperTool]
 let buttonsContainer = document.querySelector('.mode-buttons')
 let pickedMode;
 let colorPicker;
@@ -104,6 +105,11 @@ function draw() {
         } else if (pickedMode == 'Erase Color') {
             colorPicker = ''
             event.target.style.backgroundColor = colorPicker
+        } else if (pickedMode =='Eyedropper Tool') {
+            event.target.style.backgroundColor == '' ? colorPicker = '#FFFFFF' : colorPicker = event.target.style.backgroundColor
+            document.getElementById('color-picker').value = rgbToHex(colorPicker)
+            rgbToHex(colorPicker)
+            singleColorBtn.click()
         }
     });
 
@@ -117,6 +123,11 @@ function draw() {
         } else if (pickedMode == 'Erase Color') {
             colorPicker = ''
             event.target.style.backgroundColor = colorPicker
+        } else if (pickedMode =='Eyedropper Tool') {
+            event.target.style.backgroundColor == '' ? colorPicker = '#FFFFFF' : colorPicker = event.target.style.backgroundColor
+            document.getElementById('color-picker').value = rgbToHex(colorPicker)
+            rgbToHex(colorPicker)
+            singleColorBtn.click()
         }
         
     }
@@ -126,6 +137,22 @@ function draw() {
         flag = false;
     });
 }
-    
 
+
+
+function rgbToHex (rgbString) {
+    if (rgbString == '#FFFFFF') {
+        return '#FFFFFF'
+    } else {
+    const rgbMatch = rgbString.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+
+    const r = parseInt(rgbMatch[1]).toString(16).padStart(2, '0');
+    const g = parseInt(rgbMatch[2]).toString(16).padStart(2, '0');
+    const b = parseInt(rgbMatch[3]).toString(16).padStart(2, '0');
+
+    return `#${r}${g}${b}`;
+    }
+}
+
+    
 
