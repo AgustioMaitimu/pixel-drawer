@@ -15,6 +15,7 @@ body {
     color: white;
     background-color: black;
     flex-basis: 200px;
+    width: 200px;
     font-size: 20px;
     font-weight: 1000;
     border-radius: 4px;
