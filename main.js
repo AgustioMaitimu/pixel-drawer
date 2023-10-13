@@ -63,7 +63,11 @@ function createGrid() {
         grid.classList.add(`grid-no-border`)
         grid.style.height = `${gridProportion}px`
         grid.style.width = `${gridProportion}px`
+        grid.addEventListener('dragstart', (event) => {
+            event.preventDefault()
+        })
         canvas.appendChild(grid)
+        
 
         draw()
         
