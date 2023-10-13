@@ -97,48 +97,19 @@ function clearCanvas() {
 function draw() {
     grid.addEventListener('mousedown', function(event) {
         flag = true;
-        if (pickedMode == 'Random Color') {
-            event.target.style.backgroundColor = `rgb(${Math.floor(Math.random() * (230 - 50 + 1)) + 100}, ${Math.floor(Math.random() * (230 - 100 + 1)) + 100}, ${Math.floor(Math.random() * (230 - 100 + 1)) + 100})`
-        } else if (pickedMode == 'Single Color') {
-            colorPicker = document.getElementById('color-picker').value
-            event.target.style.backgroundColor = colorPicker
-        } else if (pickedMode == 'Erase Color') {
-            colorPicker = ''
-            event.target.style.backgroundColor = colorPicker
-        } else if (pickedMode =='Eyedropper Tool') {
-            event.target.style.backgroundColor == '' ? colorPicker = '#FFFFFF' : colorPicker = event.target.style.backgroundColor
-            document.getElementById('color-picker').value = rgbToHex(colorPicker)
-            rgbToHex(colorPicker)
-            singleColorBtn.click()
-        }
+        processDrawing()
     });
 
     grid.addEventListener('mouseenter', function(event) {
     if (flag) {
-        if (pickedMode == 'Random Color') {
-            event.target.style.backgroundColor = `rgb(${Math.floor(Math.random() * (230 - 50 + 1)) + 100}, ${Math.floor(Math.random() * (230 - 100 + 1)) + 100}, ${Math.floor(Math.random() * (230 - 100 + 1)) + 100})`
-        } else if (pickedMode == 'Single Color') {
-            colorPicker = document.getElementById('color-picker').value
-            event.target.style.backgroundColor = colorPicker
-        } else if (pickedMode == 'Erase Color') {
-            colorPicker = ''
-            event.target.style.backgroundColor = colorPicker
-        } else if (pickedMode =='Eyedropper Tool') {
-            event.target.style.backgroundColor == '' ? colorPicker = '#FFFFFF' : colorPicker = event.target.style.backgroundColor
-            document.getElementById('color-picker').value = rgbToHex(colorPicker)
-            rgbToHex(colorPicker)
-            singleColorBtn.click()
-        }
-        
-    }
+        processDrawing()
+        }  
     });
 
     grid.addEventListener('mouseup', function(event) {
         flag = false;
     });
 }
-
-
 
 function rgbToHex (rgbString) {
     if (rgbString == '#FFFFFF') {
@@ -151,6 +122,23 @@ function rgbToHex (rgbString) {
     const b = parseInt(rgbMatch[3]).toString(16).padStart(2, '0');
 
     return `#${r}${g}${b}`;
+    }
+}
+
+function processDrawing() {
+    if (pickedMode == 'Random Color') {
+        event.target.style.backgroundColor = `rgb(${Math.floor(Math.random() * (230 - 50 + 1)) + 100}, ${Math.floor(Math.random() * (230 - 100 + 1)) + 100}, ${Math.floor(Math.random() * (230 - 100 + 1)) + 100})`
+    } else if (pickedMode == 'Single Color') {
+        colorPicker = document.getElementById('color-picker').value
+        event.target.style.backgroundColor = colorPicker
+    } else if (pickedMode == 'Erase Color') {
+        colorPicker = ''
+        event.target.style.backgroundColor = colorPicker
+    } else if (pickedMode == 'Eyedropper Tool') {
+        event.target.style.backgroundColor == '' ? colorPicker = '#FFFFFF' : colorPicker = event.target.style.backgroundColor
+        document.getElementById('color-picker').value = rgbToHex(colorPicker)
+        rgbToHex(colorPicker)
+        singleColorBtn.click()
     }
 }
 
